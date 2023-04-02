@@ -12,8 +12,6 @@ def MergeSort(A, p, r):
 
 
 def Merge(A, p, q, r):
-    n1 = q - p + 1
-    n2 = r - q
     L = A[p:q + 1]
     R = A[q + 1:r + 1]
     L.append(inf)
@@ -23,10 +21,10 @@ def Merge(A, p, q, r):
     for k in range(p, r + 1):
         if L[i] <= R[j]:
             A[k] = L[i]
-            i = i + 1
+            i += 1
         else:
             A[k] = R[j]
-            j = j + 1
+            j += 1
 
 
 def SelectionSort(A):
@@ -39,9 +37,11 @@ def SelectionSort(A):
         A[i], A[minimum] = A[minimum], A[i]
 
 
+
+
 if __name__ == '__main__':
     A = [1, 4, 2, 5, 9, 3]
     print(A)
-    #MergeSort(A, 0, len(A) - 1)
-    SelectionSort(A)
+    MergeSort(A, 0, len(A) - 1)
+    #SelectionSort(A)
     print(A)
