@@ -41,9 +41,9 @@ def SelectionSort(A):
         A[i], A[minimum] = A[minimum], A[i]
 
 
-def plotSortGraph(algType, insertType):
+def plotSortGraph(algType, insertType, arrayDim, plot=True):
     x, y = [], []
-    for i in range(10, 1000, 10):
+    for i in range(1, arrayDim, 5):
         x.append(i)
         A = np.arange(i) if insertType == 0 else random.sample(range(i), i)
         if algType == 0:
@@ -56,12 +56,21 @@ def plotSortGraph(algType, insertType):
             end = time.perf_counter()
         z = y[-1] if (len(y) != 0) else 0
         y.append((end - start) / i + z)
-    plt.plot(x, y)
-    title = 'Selection-Sort' if algType == 0 else 'Merge-Sort'
-    title += ' on Ordered List' if algType == 0 else ' on Randomized List'
-    plt.title(title)
-    plt.show()
+    if plot:
+        plt.plot(x, y)
+        title = 'Selection-Sort' if algType == 0 else 'Merge-Sort'
+        title += ' on Ordered List ' if insertType == 0 else ' on Randomized List '
+        title += str(arrayDim)
+        plt.title(title)
+        plt.show()
+    else:
+        return x, y
 
 
 if __name__ == '__main__':
-    [[plotSortGraph(i, j) for i in range(2)] for j in range(2)]
+    size = [50, 100, 300, 500]
+    [[[plotSortGraph(i, j, s) for i in range(2)] for j in range(2)] for s in size]
+    '''plt.plot(plotSortGraph(0, 0)[0], plotSortGraph(0, 0)[1], label='SelectionSort')
+    plt.plot(plotSortGraph(1, 0)[0], plotSortGraph(1, 0)[1], label='MergeSort')
+    plt.legend()
+    plt.show()'''
